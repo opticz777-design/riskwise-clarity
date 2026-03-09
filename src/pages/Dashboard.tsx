@@ -1,16 +1,18 @@
 // Dashboard home page with system overview
 import { useAuth } from "@/contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Mountain, Database, Brain, History, Shield } from "lucide-react";
 
 export default function Dashboard() {
   const { profile } = useAuth();
+  const navigate = useNavigate();
 
   const stats = [
-    { icon: Database, label: "Upload Dataset", description: "Upload CSV data for training", color: "text-primary" },
-    { icon: Brain, label: "Train Model", description: "Train CNN on your data", color: "text-accent" },
-    { icon: Mountain, label: "Predict Risk", description: "Assess landslide probability", color: "text-success" },
-    { icon: History, label: "View History", description: "Past predictions & results", color: "text-secondary" },
+    { icon: Database, label: "Upload Dataset", description: "Upload CSV data for training", color: "text-primary", url: "/upload" },
+    { icon: Brain, label: "Train Model", description: "Train CNN on your data", color: "text-accent", url: "/upload" },
+    { icon: Mountain, label: "Predict Risk", description: "Assess landslide probability", color: "text-success", url: "/predict" },
+    { icon: History, label: "View History", description: "Past predictions & results", color: "text-secondary", url: "/history" },
   ];
 
   return (
