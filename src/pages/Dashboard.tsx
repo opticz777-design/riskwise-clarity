@@ -29,8 +29,12 @@ export default function Dashboard() {
 
       {/* Quick action cards */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        {stats.map(({ icon: Icon, label, description, color }) => (
-          <Card key={label} className="hover:shadow-md transition-shadow cursor-pointer">
+        {stats.map(({ icon: Icon, label, description, color, url }) => (
+          <Card
+            key={label}
+            className="hover:shadow-md transition-shadow cursor-pointer"
+            onClick={() => navigate(url)}
+          >
             <CardHeader className="flex flex-row items-center gap-3 pb-2">
               <div className={`p-2 rounded-lg bg-muted ${color}`}>
                 <Icon className="h-5 w-5" />
