@@ -1,16 +1,18 @@
 // Dashboard home page with system overview
 import { useAuth } from "@/contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Mountain, Database, Brain, History, Shield } from "lucide-react";
 
 export default function Dashboard() {
   const { profile } = useAuth();
+  const navigate = useNavigate();
 
   const stats = [
-    { icon: Database, label: "Upload Dataset", description: "Upload CSV data for training", color: "text-primary" },
-    { icon: Brain, label: "Train Model", description: "Train CNN on your data", color: "text-accent" },
-    { icon: Mountain, label: "Predict Risk", description: "Assess landslide probability", color: "text-success" },
-    { icon: History, label: "View History", description: "Past predictions & results", color: "text-secondary" },
+    { icon: Database, label: "Upload Dataset", description: "Upload CSV data for training", color: "text-primary", url: "/upload" },
+    { icon: Brain, label: "Train Model", description: "Train CNN on your data", color: "text-accent", url: "/upload" },
+    { icon: Mountain, label: "Predict Risk", description: "Assess landslide probability", color: "text-success", url: "/predict" },
+    { icon: History, label: "View History", description: "Past predictions & results", color: "text-secondary", url: "/history" },
   ];
 
   return (
@@ -27,8 +29,12 @@ export default function Dashboard() {
 
       {/* Quick action cards */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        {stats.map(({ icon: Icon, label, description, color }) => (
-          <Card key={label} className="hover:shadow-md transition-shadow cursor-pointer">
+        {stats.map(({ icon: Icon, label, description, color, url }) => (
+          <Card
+            key={label}
+            className="hover:shadow-md transition-shadow cursor-pointer"
+            onClick={() => navigate(url)}
+          >
             <CardHeader className="flex flex-row items-center gap-3 pb-2">
               <div className={`p-2 rounded-lg bg-muted ${color}`}>
                 <Icon className="h-5 w-5" />
